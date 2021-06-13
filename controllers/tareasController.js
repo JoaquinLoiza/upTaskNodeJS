@@ -10,6 +10,7 @@ exports.agregarTarea = async (req, res, next) => {
     
     //estado incompleto
     const estado = 0;
+    
     //Id del proyecto
     const proyectoId = proyecto.id;
 

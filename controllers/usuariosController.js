@@ -6,6 +6,14 @@ exports.formCrearUsuario = async (req, res) => {
     })
 };
 
+exports.formIniciarSesion = async (req, res) => {
+    const {error} = res.locals.mensajes;
+    res.render('iniciarSesion', {
+        nombrePagina: 'Iniciar Sesion',
+        error: error
+    })
+};
+
 exports.crearCuenta = async (req, res) => {
     //Leer los datos del input
     const { email, password } = req.body;
@@ -18,10 +26,12 @@ exports.crearCuenta = async (req, res) => {
         })
         res.redirect('/iniciar-sesion');
     } catch (e) {
-        res.render('crearCuenta', {
-            //enviamos los errores a la vista
-            errores: e.errors,
-            nombrePagina: 'Crear cuenta en Up Task'
+        req.flash( 'error', e.errors.map(error => error.message) );
+        res.render( 'crearCuenta', {
+            mensajes: req.flash(),
+            nombrePagina: 'Crear cuenta en Up Task',
+            email,
+            password
         })
     }
 };

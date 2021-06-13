@@ -35,10 +35,10 @@ const usuarios = db.define('usuarios',
             notEmpty: {
                 msg: 'El password no puede estar vacio'
             },
-            min: {
-                args: 8,
-                msg: 'Debe contener al menos 8 caracteres',
-            }
+            len: {
+                args: [8,60],
+                msg: "La contraseña debe contener 8 caracteres como minimo"
+           }
         }
     }
 },
@@ -50,6 +50,10 @@ const usuarios = db.define('usuarios',
     }
 });
 
-usuarios.hasMany(proyectos);
+// Metodos personalizados
+usuarios.prototype.verificarPassword = function(password){
+    return bcrypt.compareSync(password, this.password);
+}
 
+//usuarios.hasMany(proyectos);
 module.exports = usuarios;
