@@ -7,5 +7,5 @@ block contenido
         h1= nombrePagina
         if errores 
             each error in errores 
-                .error.alerta= error.texto
+                p.error.alerta= error.texto
         +crearProyecto(proyecto)
