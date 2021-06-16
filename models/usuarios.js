@@ -1,39 +1,36 @@
 const Sequelize = require('sequelize');
 const db = require('../config/db');
-const proyectos = require('../models/proyectos');
+const Proyectos = require('../models/Proyectos');
 const bcrypt = require('bcrypt-nodejs');
 
-const usuarios = db.define('usuarios', 
-{
+const Usuarios = db.define('usuarios', {
     id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER, 
         primaryKey: true,
         autoIncrement: true
     },
     email: {
         type: Sequelize.STRING(60),
-        allowNull: false,
-        //Checkea que sea un email valido mediante Sequelize 
+        allowNull : false, 
         validate: {
             isEmail: {
-                msg: 'Agrega un correo válido'
+                msg : 'Agrega un Correo Válido'
             },
             notEmpty: {
-                msg: 'El email no puede estar vacio'
+                msg: 'El e-mail no puede ir vacio'
             }
-        },
-        //Valida que exista un solo usuario con ese email
+        }, 
         unique: {
             args: true,
-            msg: 'Usuario ya registrado'
+            msg: 'Usuario Ya Registrado'
         }
-    },
+    },  
     password: {
-        type: Sequelize.STRING(60),
-        allowNull: false,
+        type: Sequelize.STRING(60), 
+        allowNull: false, 
         validate: {
             notEmpty: {
-                msg: 'El password no puede estar vacio'
+                msg: 'El password no puede ir vacio'
             },
             len: {
                 args: [8,60],
@@ -41,19 +38,19 @@ const usuarios = db.define('usuarios',
            }
         }
     }
-},
-{
+}, {
     hooks: {
         beforeCreate(usuario) {
-            usuario.password = bcrypt.hashSync(usuario.password, bcrypt.genSaltSync(10));
+            usuario.password = bcrypt.hashSync(usuario.password, bcrypt.genSaltSync(10) );
         }
     }
 });
 
-// Metodos personalizados
-usuarios.prototype.verificarPassword = function(password){
+// Métodos personalizados
+Usuarios.prototype.verificarPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
 }
 
-//usuarios.hasMany(proyectos);
-module.exports = usuarios;
+Usuarios.hasMany(Proyectos);
+
+module.exports = Usuarios;

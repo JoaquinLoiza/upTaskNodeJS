@@ -18,7 +18,6 @@ exports.usuarioAutenticado = (req, res, next) => {
 }
 
 exports.cerrarSesion = (req, res) => {
-    console.log('Entre aca')
     req.session.destroy( ()=> {
         res.redirect('/iniciar-sesion');
     })
