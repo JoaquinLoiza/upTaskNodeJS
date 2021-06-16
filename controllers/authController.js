@@ -6,3 +6,13 @@ exports.autenticarUsuario = passport.authenticate('local', {
     failureFlash: true,
     badRequestMessage: 'Existen campos vacios'
 })
+
+//Funcion para checkear si el usuario se encuentra logueado
+exports.usuarioAutenticado = (req, res, next) => {
+
+    if(req.isAuthenticated()){
+        return next();
+    }
+
+    return res.redirect('/iniciar-sesion');
+}
