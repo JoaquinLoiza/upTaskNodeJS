@@ -48,5 +48,8 @@ module.exports = function(){
     router.get('/iniciar-sesion', usuariosController.formIniciarSesion);
     router.post('/iniciar-sesion', authController.autenticarUsuario);
 
+    //cerrar sesion
+    router.get('/cerrar-sesion', authController.cerrarSesion);
+
     return router;
 };
