@@ -1,4 +1,3 @@
-const { urlencoded } = require('express');
 const Sequelize = require('sequelize');
 const db = require('../config/db');
 const slug = require('slug');
