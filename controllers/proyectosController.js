@@ -41,8 +41,7 @@ exports.nuevoProyecto = async(req, res) => {
             errores
         });
     }else {
-        const usuarioId = res.locals.usuario.id;
-        await Proyectos.create({ nombre, usuarioId })
+        await Proyectos.create({ nombre, usuarioId });
         res.redirect('/');
     }
 };

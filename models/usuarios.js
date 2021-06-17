@@ -37,7 +37,9 @@ const Usuarios = db.define('usuarios', {
                 msg: "La contraseña debe contener 8 caracteres como minimo"
            }
         }
-    }
+    },
+    token: Sequelize.STRING,
+    expiracion: Sequelize.DATE
 }, {
     hooks: {
         beforeCreate(usuario) {
