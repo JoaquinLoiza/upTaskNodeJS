@@ -1,5 +1,5 @@
 const passport = require('passport');
-const Usuarios = require('../models/usuarios');
+const Usuarios = require('../models/Usuarios');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const crypto = require('crypto');

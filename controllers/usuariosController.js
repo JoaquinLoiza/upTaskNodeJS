@@ -1,4 +1,4 @@
-const usuarios = require('../models/usuarios');
+const Usuarios = require('../models/Usuarios');
 const enviarEmail = require('../handlers/email');
 
 exports.formCrearUsuario = async (req, res) => {
@@ -21,7 +21,7 @@ exports.crearCuenta = async (req, res) => {
 
     try {
         //crear Usuario
-        await usuarios.create({
+        await Usuarios.create({
             email,
             password
         })
@@ -60,7 +60,7 @@ exports.formRestablecerPassword = (req, res) => {
 
 //Cambia el estado de una cuenta
 exports.confirmarCuenta = async (req, res) => {
-    const usuario = await usuarios.findOne({
+    const usuario = await Usuarios.findOne({
         where: {
             email: req.params.correo
         }
