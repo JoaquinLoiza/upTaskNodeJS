@@ -3,14 +3,17 @@ const pug = require('pug');
 const juice = require('juice');
 const htmlToText = require('html-to-text');
 const util = require('util');
-const emailConfig = require('../config/email');
+
+if(process.env.NODE_ENV != 'production') {
+  require('dotenv').config({path: 'variables.env'});
+}
 
 let transport = nodemailer.createTransport({
-    host: emailConfig.host,
-    port: emailConfig.port,
+    host: process.env.EM_HOST,
+    port: process.env.EM_PORT,
     auth: {
-      user:emailConfig.user,
-      pass: emailConfig.pass, 
+      user:process.env.EM_USER,
+      pass: process.env.EM_PASS, 
     },
 });
 
