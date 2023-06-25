@@ -42,13 +42,16 @@ exports.crearCuenta = async (req, res) => {
         req.flash('correcto', 'Enviamos un correo, confirma tu cuenta!');
         res.redirect('/iniciar-sesion');
     } catch (e) {
-        req.flash( 'error', e.errors.map(error => error.message) );
-        res.render( 'crearCuenta', {
-            mensajes: req.flash(),
-            nombrePagina: 'Crear cuenta en Up Task',
-            email,
-            password
-        })
+
+        if(e.errors != undefined){
+            req.flash( 'error', e.errors.map(error => error.message) );
+            res.render( 'crearCuenta', {
+                mensajes: req.flash(),
+                nombrePagina: 'Crear cuenta en Up Task',
+                email,
+                password
+            })
+        } else console.log(e);
     }
 };
 

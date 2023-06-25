@@ -9,6 +9,8 @@ if(process.env.NODE_ENV != 'production') {
 }
 
 let transport = nodemailer.createTransport({
+    debug: false,
+    logger:false,
     host: process.env.EM_HOST,
     port: process.env.EM_PORT,
     auth: {
@@ -27,12 +29,13 @@ exports.enviar = async (opciones) => {
   const html = generarHTML(opciones.archivo, opciones);
   const text = htmlToText.fromString(html);
   let mailOptions = {
-    from: 'UpTask <no-reply@uptask.com>',
+    from: 'UpTask <jloiza.dev@zohomail.com>',
     to: opciones.usuario.email,
     subject: opciones.subject,
     text: text,
     html: html,
   };
+  
   const enviarEmail = util.promisify(transport.sendMail, transport);
   return enviarEmail.call(transport, mailOptions);
 }
